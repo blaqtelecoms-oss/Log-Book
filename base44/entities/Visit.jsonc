@@ -1,0 +1,158 @@
+{
+  "name": "Visit",
+  "type": "object",
+  "description": "One visitor sign-in at the premises, with the time they entered and left.",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "description": "Visitor name and surname"
+    },
+    "address": {
+      "type": "string",
+      "description": "Visitor's address"
+    },
+    "contact_number": {
+      "type": "string",
+      "description": "Visitor contact number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Visitor email address"
+    },
+    "town": {
+      "type": "string",
+      "description": "The visitor's company, organisation or home town"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Purpose of the visit; matches an active VisitReason label"
+    },
+    "visit_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the visit (YYYY-MM-DD)"
+    },
+    "time_in": {
+      "type": "string",
+      "description": "Time the visitor entered, HH:mm"
+    },
+    "time_out": {
+      "type": "string",
+      "description": "Time the visitor left, HH:mm; set by staff on sign out"
+    },
+    "branch": {
+      "type": "string",
+      "description": "Site the visit happened at; decides which staff can see the record"
+    },
+    "consent_given": {
+      "type": "boolean",
+      "description": "Privacy consent recorded from the visitor"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Internal staff notes"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "flagged",
+        "archived"
+      ],
+      "default": "active"
+    },
+    "is_demo": {
+      "type": "boolean",
+      "default": false,
+      "description": "Sample data created for demonstration; removable from Settings"
+    }
+  },
+  "required": [
+    "full_name",
+    "address",
+    "contact_number",
+    "email",
+    "town",
+    "reason",
+    "visit_date",
+    "time_in",
+    "branch"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "data.branch": "{{user.data.branch}}"
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "data.staff_role": "admin"
+              }
+            },
+            {
+              "data.branch": "{{user.data.branch}}"
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "data.staff_role": "admin"
+              }
+            },
+            {
+              "data.branch": "{{user.data.branch}}"
+            }
+          ]
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "data.staff_role": "admin"
+              }
+            },
+            {
+              "data.branch": "{{user.data.branch}}"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

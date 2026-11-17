@@ -1,0 +1,135 @@
+{
+  "name": "Member",
+  "type": "object",
+  "description": "A pre-registered visitor with an access card. The card number is the barcode the entrance camera reads to sign them in.",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "description": "Visitor name and surname"
+    },
+    "card_number": {
+      "type": "string",
+      "description": "The number printed under the barcode on the access card; must be unique"
+    },
+    "address": {
+      "type": "string",
+      "description": "Address, copied onto each visit the card signs in"
+    },
+    "contact_number": {
+      "type": "string",
+      "description": "Contact number"
+    },
+    "email": {
+      "type": "string",
+      "description": "Visitor email address"
+    },
+    "town": {
+      "type": "string",
+      "description": "The visitor's company, organisation or home town"
+    },
+    "branch": {
+      "type": "string",
+      "description": "Site that issued the card; decides which staff can see the record"
+    },
+    "member_since": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the card was issued (YYYY-MM-DD)"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true,
+      "description": "An inactive card is refused at the entrance"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Internal staff notes"
+    }
+  },
+  "required": [
+    "full_name",
+    "card_number",
+    "address",
+    "contact_number",
+    "email",
+    "town",
+    "branch"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "data.branch": "{{user.data.branch}}"
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "data.staff_role": "admin"
+              }
+            },
+            {
+              "data.branch": "{{user.data.branch}}"
+            }
+          ]
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "data.staff_role": "admin"
+              }
+            },
+            {
+              "data.branch": "{{user.data.branch}}"
+            }
+          ]
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "data.staff_role": "super_admin"
+          }
+        },
+        {
+          "$and": [
+            {
+              "user_condition": {
+                "data.staff_role": "admin"
+              }
+            },
+            {
+              "data.branch": "{{user.data.branch}}"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

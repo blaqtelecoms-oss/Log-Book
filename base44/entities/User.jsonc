@@ -1,0 +1,34 @@
+{
+  "name": "User",
+  "type": "object",
+  "description": "Built-in user, extended with the staff role and site used by the visitor log book.",
+  "properties": {
+    "staff_role": {
+      "type": "string",
+      "enum": [
+        "super_admin",
+        "admin",
+        "viewer"
+      ],
+      "description": "Staff portal role. Set only by a super admin through the portal; app users can never change it themselves.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "role": "system"
+          }
+        }
+      }
+    },
+    "branch": {
+      "type": "string",
+      "description": "Site this staff member works at. Scopes every visitor record, dashboard and report they can see. Set only by a super admin through the portal.",
+      "rls": {
+        "update": {
+          "user_condition": {
+            "role": "system"
+          }
+        }
+      }
+    }
+  }
+}

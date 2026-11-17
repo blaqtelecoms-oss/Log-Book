@@ -1,0 +1,82 @@
+{
+  "name": "Settings",
+  "type": "object",
+  "description": "Single record holding the company's branding, kiosk behaviour and privacy configuration.",
+  "properties": {
+    "company_name": {
+      "type": "string",
+      "default": "Visitor Log Book"
+    },
+    "site_name": {
+      "type": "string",
+      "default": "Main Site",
+      "description": "The site this kiosk signs visitors in at; must be one of the configured sites"
+    },
+    "sites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": [
+        "Main Site"
+      ],
+      "description": "The company's premises. Staff are scoped to one site and every sign-in is filed under one"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Uploaded logo used throughout the app in place of the built-in mark"
+    },
+    "welcome_message": {
+      "type": "string",
+      "default": "Welcome, {name}",
+      "description": "Shown on the welcome screen; {name} is replaced with the visitor's name"
+    },
+    "redirect_seconds": {
+      "type": "number",
+      "default": 5
+    },
+    "idle_reset_seconds": {
+      "type": "number",
+      "default": 60
+    },
+    "require_consent": {
+      "type": "boolean",
+      "default": true
+    },
+    "privacy_notice_text": {
+      "type": "string"
+    },
+    "retention_days": {
+      "type": "number",
+      "default": 730
+    },
+    "contact_email": {
+      "type": "string"
+    },
+    "opening_hours": {
+      "type": "string"
+    }
+  },
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

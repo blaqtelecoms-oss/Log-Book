@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Library members — the digital card
+   ========================================================================== */
+.mcard{
+  position:relative;width:100%;max-width:420px;overflow:hidden;border-radius:20px;
+  padding:20px 20px 16px 30px;color:#fff;
+  background:
+    radial-gradient(120% 90% at 100% 0%,rgba(255,255,255,.18),transparent 60%),
+    linear-gradient(135deg,#003366,#005599);
+  box-shadow:0 18px 50px rgba(0,24,47,.3);
+  font-family:var(--font-sans)
+}
+.mcard-stripe{position:absolute;left:0;top:0;bottom:0;width:8px;display:flex;flex-direction:column}
+.mcard-stripe i{flex:1}
+.mcard-stripe i:nth-child(1){background:#0b5ea8}
+.mcard-stripe i:nth-child(2){background:#e8c36a}
+.mcard-stripe i:nth-child(3){background:#06182f}
+.mcard-top{display:flex;align-items:center;gap:11px}
+.mcard-mark{width:36px;height:36px;flex:none;border-radius:10px;background:#fff;padding:4px}
+.mcard-org p{margin:0;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.mcard-org .mcard-kind{
+  margin-top:2px;font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.72)
+}
+.mcard-body{display:flex;align-items:center;gap:14px;margin:18px 0 16px}
+.mcard-avatar{
+  width:64px;height:64px;flex:none;border-radius:50%;border:2px solid #d4af37;
+  display:grid;place-items:center;font-size:20px;font-weight:700;
+  background:linear-gradient(140deg,#0b5ea8,#06182f)
+}
+.mcard-who{min-width:0}
+.mcard-name{margin:0;font-size:19px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+.mcard-meta{margin:4px 0 9px;font-size:12px;color:rgba(255,255,255,.82)}
+.mcard-pill{
+  display:inline-block;border-radius:999px;background:#f4d03f;color:#111;
+  padding:4px 12px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase
+}
+.mcard-pill--off{background:rgba(255,255,255,.28);color:#fff}
+/* The card's code is the star of the show: it fills the space so the entrance camera locks on fast. */
+.mcard-foot{
+  background:#fff;border-radius:14px;padding:16px 16px 13px;
+  display:flex;flex-direction:column;align-items:center;gap:9px
+}
+.mcard-qr{width:100%;max-width:260px;aspect-ratio:1;height:auto;flex:none;display:block}
+.mcard-hint{
+  margin:0;font-size:9.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:#6b7a90;text-align:center
+}
+/* The card is rendered here for the moment it takes to save it as an image. */
+.mcard-export{position:fixed;left:-9999px;top:0;width:420px;height:0;overflow:hidden;pointer-events:none}
