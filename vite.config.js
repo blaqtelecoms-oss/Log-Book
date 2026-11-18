@@ -12,9 +12,16 @@ const NOT_PREBUNDLED = new Set(["react", "react-dom", "@base44/vite-plugin", "@t
 const { dependencies } = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf8"));
 const PREBUNDLE = Object.keys(dependencies).filter((name) => !NOT_PREBUNDLED.has(name));
 
+// Server-only configuration (the service-role key must never reach the browser
+// bundle), read from the environment the dev server was started with.
+const serverEnv = {
+  __SUPABASE_URL__: JSON.stringify(process.env.VITE_SUPABASE_URL ?? ""),
+  __SUPABASE_SERVICE_ROLE_KEY__: JSON.stringify(process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""),
+};
+
 export default defineConfig({
   optimizeDeps: { include: PREBUNDLE },
-  environments: { ssr: { optimizeDeps: { include: PREBUNDLE } } },
+  environments: { ssr: { optimizeDeps: { include: PREBUNDLE }, define: serverEnv } },
   plugins: [
     base44({
       hmrNotifier: true,

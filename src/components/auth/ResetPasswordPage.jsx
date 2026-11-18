@@ -1,20 +1,34 @@
 import { Link } from "@tanstack/react-router";
-import { AlertTriangle, Lock } from "lucide-react";
-import { useState } from "react";
+import { AlertTriangle, Loader2, Lock } from "lucide-react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/api/supabase";
 import { base44 } from "@/api/base44Client";
 import { AuthLayout } from "@/components/auth/AuthLayout";
 import { AuthError, SubmitButton } from "@/components/auth/parts";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-// The /reset-password page; the reset email links here with ?token=.
+// The /reset-password page; the reset email links here and Supabase signs the visit
+// in with the short-lived recovery session it carries.
 export function ResetPasswordPage() {
-  // Read raw: the router's search parser would turn an all-digit token into a number.
-  const token = new URLSearchParams(window.location.search).get("token");
+  const [checking, setChecking] = useState(true);
+  const [hasSession, setHasSession] = useState(false);
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase.auth.getSession().then(({ data }) => {
+      if (cancelled) return;
+      setHasSession(!!data.session);
+      setChecking(false);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function submit(e) {
     e.preventDefault();
@@ -25,7 +39,7 @@ export function ResetPasswordPage() {
     }
     setBusy(true);
     try {
-      await base44.auth.resetPassword({ resetToken: token, newPassword: password });
+      await base44.auth.resetPassword({ newPassword: password });
       window.location.href = "/login";
     } catch (err) {
       setError(err.message || "Failed to reset password");
@@ -33,12 +47,22 @@ export function ResetPasswordPage() {
     }
   }
 
-  if (!token) {
+  if (checking) {
+    return (
+      <AuthLayout icon={Lock} title="New password" subtitle="Checking your reset link">
+        <div className="flex justify-center py-6">
+          <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" aria-hidden="true" />
+        </div>
+      </AuthLayout>
+    );
+  }
+
+  if (!hasSession) {
     return (
       <AuthLayout
         icon={AlertTriangle}
         title="Invalid reset link"
-        subtitle="This password reset link is missing or invalid"
+        subtitle="This password reset link is missing or has expired"
         footer={
           <Link to="/forgot-password" className="font-medium text-primary hover:underline">
             Request a new link
@@ -49,6 +73,7 @@ export function ResetPasswordPage() {
       </AuthLayout>
     );
   }
+
   return (
     <AuthLayout icon={Lock} title="New password" subtitle="Enter your new password below">
       <AuthError>{error}</AuthError>

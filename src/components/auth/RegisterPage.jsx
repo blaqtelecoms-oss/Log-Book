@@ -35,7 +35,12 @@ export function RegisterPage() {
     }
     setBusy(true);
     try {
-      await base44.auth.register({ email, password });
+      const result = await base44.auth.register({ email, password });
+      // Supabase signs the account in immediately when email confirmation is off.
+      if (result?.session) {
+        window.location.href = returnTo;
+        return;
+      }
       setStep("otp");
     } catch (err) {
       setError(err.message || "Registration failed");

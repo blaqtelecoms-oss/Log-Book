@@ -325,17 +325,13 @@ export const inviteStaff = createServerFn({ method: "POST" })
     await staffGuard(db, context.user, { superAdmin: true });
     const users = asArray(await db.entities.User.list());
     const invited = users.find((u) => String(u.email || "").toLowerCase() === data.email.toLowerCase());
-    // Sending the invite needs the signed-in super admin; the app users API is not on the service-role client.
-    try {
-      await base44.users.inviteUser(data.email, "admin");
-    } catch (error) {
-      // Someone who already has a portal account cannot be invited again — their record is updated below instead.
-      if (!invited) {
-        throw Object.assign(new Error(error?.message || "The invite could not be sent"), { status: error?.status ?? 400 });
-      }
+    // Someone who already has an account gets the portal role on their record; a new
+    // address gets a Supabase account with the shared starter password.
+    if (invited) {
+      await db.entities.User.update(invited.id, { staff_role: data.staff_role, role: "admin" });
+    } else {
+      await base44.users.inviteUser(data.email, data.staff_role);
     }
-    // The platform invite takes the elevated role; the library role rides on the user record.
-    if (invited) await db.entities.User.update(invited.id, { staff_role: data.staff_role, role: "admin" });
     await db.entities.AuditLog.create({
       actor_email: context.user.email,
       action: "create",
@@ -389,7 +385,7 @@ export const removeStaff = createServerFn({ method: "POST" })
     const db = context.getBase44().asServiceRole;
     await staffGuard(db, context.user, { superAdmin: true });
     if (data.user_id === context.user.id) throw denied("You cannot remove your own access");
-    await db.entities.User.delete(data.user_id);
+    await context.getBase44().users.removeUser(data.user_id);
     await db.entities.AuditLog.create({
       actor_email: context.user.email,
       action: "delete",

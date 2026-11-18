@@ -1,23 +1,25 @@
-import { createClientFromRequest, getAccessToken } from "@base44/sdk";
 import { createMiddleware } from "@tanstack/react-start";
 import { getRequest, setResponseStatus } from "@tanstack/react-start/server";
+import { serverBackend } from "@/lib/server-db";
 
 // Both middlewares hand handlers the same lazy `context.getBase44()`: a
-// function, not the client, because the client needs the platform headers and
-// a handler that never touches Base44 must still answer without them. The
-// platform sets those headers on every request that reaches the server; a
-// visitor's Authorization header makes the client act as that visitor.
+// function, not the client, because the backend needs the Supabase configuration
+// and a handler that never touches the database must still answer without it.
+// The caller's Authorization header decides who the request acts as.
 const withGetBase44 = (next, request = getRequest()) => {
-  let client;
-  return next({ context: { getBase44: () => (client ??= createClientFromRequest(request)) } });
+  let backend;
+  return next({ context: { getBase44: () => (backend ??= serverBackend(request)) } });
 };
 
-// Applied to every server function by src/start.js: sends the visitor's Base44
-// access token with the call so `context.getBase44()` acts as the visitor (entity
-// access rules apply). Anonymous visitors send nothing and get an anonymous client.
+// Applied to every server function by src/start.js: sends the visitor's Supabase
+// access token with the call so the request acts as that visitor (the staff guards
+// still check roles). Anonymous visitors send nothing and get a 401 from `requireUser`.
 export const authMiddleware = createMiddleware({ type: "function" })
   .client(async ({ next }) => {
-    const token = typeof window === "undefined" ? null : getAccessToken();
+    if (typeof window === "undefined") return next();
+    const { supabase } = await import("@/api/supabase");
+    const { data } = await supabase.auth.getSession();
+    const token = data?.session?.access_token;
     return next({ headers: token ? { Authorization: `Bearer ${token}` } : {} });
   })
   .server(({ next }) => withGetBase44(next));
@@ -28,7 +30,7 @@ export const base44RequestMiddleware = createMiddleware({ type: "request" }).ser
   withGetBase44(next, request),
 );
 
-// Only an auth rejection means "not signed in"; outages and rate limits propagate as themselves.
+// Only an auth rejection means "not signed in"; outages propagate as themselves.
 const currentUser = (context) =>
   context
     .getBase44()

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { ExternalLink, LogOut, Menu, Monitor, Moon, Search, Sun } from "lucide-react";
+import { ExternalLink, Lock, LogOut, Menu, Monitor, Moon, Search, Sun } from "lucide-react";
+import ChangePasswordDialog from "@/components/admin/ChangePasswordDialog";
 import { useAuth } from "@/lib/AuthContext";
 
 const THEMES = [
@@ -13,6 +14,7 @@ export default function TopBar({ onMenu, theme, setTheme }) {
   const navigate = useNavigate();
   const { logout } = useAuth();
   const [q, setQ] = useState("");
+  const [passwordOpen, setPasswordOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-20 flex items-center gap-2 border-b border-[var(--line)] bg-[var(--card)] px-3 py-2.5 sm:gap-3 sm:px-8 sm:py-3">
@@ -67,11 +69,21 @@ export default function TopBar({ onMenu, theme, setTheme }) {
 
       <button
         type="button"
+        onClick={() => setPasswordOpen(true)}
+        className="inline-flex h-11 items-center gap-2 rounded-xl border border-[var(--line)] px-4 text-[13.5px] font-semibold text-[var(--ink)] transition hover:bg-[var(--field)]"
+      >
+        <Lock className="h-4 w-4" /> <span className="hidden sm:inline">Password</span>
+      </button>
+
+      <button
+        type="button"
         onClick={() => logout()}
         className="inline-flex h-11 items-center gap-2 rounded-xl border border-[var(--line)] px-4 text-[13.5px] font-semibold text-[var(--ink)] transition hover:bg-[var(--field)]"
       >
         <LogOut className="h-4 w-4" /> <span className="hidden sm:inline">Sign out</span>
       </button>
+
+      <ChangePasswordDialog open={passwordOpen} onClose={() => setPasswordOpen(false)} />
     </header>
   );
 }
