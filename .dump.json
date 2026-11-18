@@ -1,0 +1,241 @@
+{
+  "Visit": [],
+  "Member": [],
+  "Settings": [
+    {
+      "company_name": "Visitor Log Book",
+      "site_name": "Main Site",
+      "sites": [
+        "Main Site"
+      ],
+      "logo_url": "https://base44.app/api/apps/6aeca1dcf39f6aaa43cd4040/files/mp/public/6aeca1dcf39f6aaa43cd4040/8bfa5a4f2_5246614a-867d-4077-ae8f-8cc4803d4bfd.webp",
+      "welcome_message": "Welcome, {name}",
+      "redirect_seconds": 5,
+      "idle_reset_seconds": 60,
+      "require_consent": true,
+      "privacy_notice_text": "We record your name, contact details and the purpose of your visit so that we always know who is on the premises, for fire safety and building security.\n\nYour details are used only for that visitor record and for anonymous visitor statistics. They are stored securely, are never shared with third parties, and are deleted once they are no longer required.\n\nYou may ask reception to view, correct or delete your record at any time.",
+      "retention_days": 730,
+      "contact_email": "",
+      "opening_hours": "Mon–Fri 08:00–17:00",
+      "id": "6aecabe2ecc7db9e912b6907",
+      "created_date": "2026-11-05T16:16:34.458000",
+      "updated_date": "2026-11-17T09:49:31.360000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    }
+  ],
+  "SlideshowSlide": [
+    {
+      "eyebrow": "Visitor Log Book",
+      "title": "Welcome to *our premises*",
+      "subtitle": "Please sign in at reception before you head through.",
+      "image_url": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80",
+      "image_alt": "Bright modern office reception lounge",
+      "credit": "Unsplash",
+      "sort_order": 1,
+      "is_active": true,
+      "duration_seconds": 6,
+      "id": "6aecabe6ecc7db9e912b6918",
+      "created_date": "2026-11-05T16:16:38.302000",
+      "updated_date": "2026-11-05T16:16:38.302000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "eyebrow": "Health & safety",
+      "title": "Know your *nearest exit*",
+      "subtitle": "In an emergency, follow the green signs and assemble outside.",
+      "image_url": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80",
+      "image_alt": "Contemporary office interior with glass walls",
+      "credit": "Unsplash",
+      "sort_order": 2,
+      "is_active": true,
+      "duration_seconds": 6,
+      "id": "6aecabe6ecc7db9e912b6919",
+      "created_date": "2026-11-05T16:16:38.302000",
+      "updated_date": "2026-11-05T16:16:38.302000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "eyebrow": "On site today",
+      "title": "Please *wear your badge*",
+      "subtitle": "Visitor badges stay visible for the whole visit.",
+      "image_url": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+      "image_alt": "Team working together in a bright meeting room",
+      "credit": "Unsplash",
+      "sort_order": 3,
+      "is_active": true,
+      "duration_seconds": 6,
+      "id": "6aecabe6ecc7db9e912b691a",
+      "created_date": "2026-11-05T16:16:38.302000",
+      "updated_date": "2026-11-05T16:16:38.302000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "eyebrow": "Thank you",
+      "title": "Have a *productive visit*",
+      "subtitle": "Reception is here if you need anything at all.",
+      "image_url": "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80",
+      "image_alt": "Open plan office with desks and natural light",
+      "credit": "Unsplash",
+      "sort_order": 4,
+      "is_active": true,
+      "duration_seconds": 6,
+      "id": "6aecabe6ecc7db9e912b691b",
+      "created_date": "2026-11-05T16:16:38.302000",
+      "updated_date": "2026-11-05T16:16:38.302000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    }
+  ],
+  "VisitReason": [
+    {
+      "label": "Meeting",
+      "icon": "users",
+      "sort_order": 1,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6911",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "label": "Interview",
+      "icon": "user",
+      "sort_order": 2,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6912",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "label": "Delivery / courier",
+      "icon": "package",
+      "sort_order": 3,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6913",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "label": "Maintenance / contractor",
+      "icon": "wrench",
+      "sort_order": 4,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6914",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "label": "Site visit / tour",
+      "icon": "map",
+      "sort_order": 5,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6915",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "label": "Event",
+      "icon": "calendar",
+      "sort_order": 6,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6916",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    },
+    {
+      "label": "Other",
+      "icon": "more",
+      "sort_order": 7,
+      "is_active": true,
+      "id": "6aecabe6ecc7db9e912b6917",
+      "created_date": "2026-11-05T16:16:38.284000",
+      "updated_date": "2026-11-05T16:16:38.284000",
+      "created_by_id": "6aeca1dcf39f6aaa43cd4041",
+      "is_sample": false
+    }
+  ],
+  "AuditLog": [
+    {
+      "actor_email": "xolani@blaqmedia.co.za",
+      "action": "settings_change",
+      "entity": "Settings",
+      "entity_id": "6aecabe2ecc7db9e912b6907",
+      "summary": "Updated company settings and kiosk behaviour",
+      "id": "6afc232b3bc97bbd7f60c379",
+      "created_date": "2026-11-17T09:49:31.424000",
+      "updated_date": "2026-11-17T09:49:31.424000",
+      "created_by_id": "service_fullstack_serving",
+      "is_sample": false
+    },
+    {
+      "actor_email": "xolani@blaqmedia.co.za",
+      "action": "login",
+      "entity": "Staff",
+      "entity_id": "",
+      "summary": "Signed in to the admin portal",
+      "id": "6afc1f8213368a1a0f1ead67",
+      "created_date": "2026-11-17T09:33:54.793000",
+      "updated_date": "2026-11-17T09:33:54.793000",
+      "created_by_id": "service_sandbox_preview_serving",
+      "is_sample": false
+    },
+    {
+      "actor_email": "xolani@blaqmedia.co.za",
+      "action": "login",
+      "entity": "Staff",
+      "entity_id": "",
+      "summary": "Signed in to the admin portal",
+      "id": "6afc1eb85a6e0aa2e39ffac8",
+      "created_date": "2026-11-17T09:30:32.592000",
+      "updated_date": "2026-11-17T09:30:32.592000",
+      "created_by_id": "service_fullstack_serving",
+      "is_sample": false
+    },
+    {
+      "actor_email": "xolani@blaqmedia.co.za",
+      "action": "login",
+      "entity": "Staff",
+      "entity_id": "",
+      "summary": "Signed in to the admin portal",
+      "id": "6aed793ab91a384f388ffb52",
+      "created_date": "2026-11-06T06:52:42.036000",
+      "updated_date": "2026-11-06T06:52:42.036000",
+      "created_by_id": "service_fullstack_serving",
+      "is_sample": false
+    }
+  ],
+  "User": [
+    {
+      "role": "admin",
+      "staff_role": "super_admin",
+      "id": "6aeca1dcf39f6aaa43cd4041",
+      "created_date": "2026-11-05T15:33:48.323000Z",
+      "updated_date": "2026-11-06T06:52:41.252000Z",
+      "email": "xolani@blaqmedia.co.za",
+      "full_name": "xolani",
+      "disabled": null,
+      "disabled_reason": null,
+      "is_verified": true,
+      "force_password_reset": false,
+      "app_id": "6aeca1dcf39f6aaa43cd4040",
+      "is_service": false,
+      "collaborator_role": "editor",
+      "_app_role": "admin"
+    }
+  ]
+}
